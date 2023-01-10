@@ -2,7 +2,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static java.util.stream.Nodes.collect;
 
 
 public class Main {
@@ -27,28 +26,20 @@ public class Main {
         long count = stream1.count();
         System.out.println(count);
 
-        Stream streamArmy = persons.stream().filter(person ->  person.getAge() > 18 && person.getAge() < 27);
-        Stream streamArmyMan = streamArmy.filter(person -> Sex.MAN.equals(Sex.MAN));
-        long countMan = streamArmyMan.count();
-        List <String> man = streamArmyMan.map(streamArmyMan.filter(families));
-        collect(Collectors.toList(man);
-        System.out.println(countMan);
-
-        //List<String> familie = persons.stream().map(streamArmyMan.filter(families));
-        //collect(Collectors.toList());
+        List<String> surname = persons.stream()
+                .filter(person -> person.getSex() == Sex.MAN)
+                .filter(person -> person.getAge() > 18 & person.getAge() < 27)
+                .map(Person::getFamily)
+                .collect(Collectors.toList());
+        System.out.println(surname);
 
 
-
-
-
-        //Predicate<Person> min18 = person -> person.getAge() < 18;
-        //persons.removeIf(min18);
-        //System.out.println(persons);
-
-       //Stream stream = Person.stream();
-      // Stream stream1 =  stream.filter(Person -> persons.getAge() < 18);
-      // long count = stream1.count();
-      // System.out.println(count);
+        List<String> surnameEducation = persons.stream()
+                .filter(person -> person.getEducation() == Education.HIGHER)
+                .sorted(Comparator.comparing(person -> person.getEducation()))
+                .map(Person::getFamily)
+                .collect(Collectors.toList());
+        System.out.println(surnameEducation);
 
 
     }
