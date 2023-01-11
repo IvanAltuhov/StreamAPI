@@ -36,6 +36,7 @@ public class Main {
 
         List<String> surnameEducation = persons.stream()
                 .filter(person -> person.getEducation() == Education.HIGHER)
+                .filter(person -> person.getAge() > 18 & person.getAge() < 27)
                 .sorted(Comparator.comparing(person -> person.getEducation()))
                 .map(Person::getFamily)
                 .collect(Collectors.toList());
